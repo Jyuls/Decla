@@ -1,224 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Extracción de datos de PDF</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 id="titulo">Calcula tu salario anual</h1>
+    <h2 id="subtitulo">Selecciona tus cheques en formato PDF</h2>
+    <div class="input-container">
+        <input aria-label="Archivo" type="file" id="pdfinput" accept=".pdf" value="hhh" multiple/>
+        <button id="upload">Subir archivos</button>
+    </div>
+
+        <div class="circular-buttons" id="circular-buttons">
+            <button id="button-back">Regresar</button>
+            <div>
+                <button id="export-pdf">Exportar a PDF</button>
+                <button id="export-excel">Exportar a Excel</button>
+            </div>
+        </div>
+
+        <table id="quincenas-table" border="1"></table>
+        <table id="total-table" border="1"></table>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.72/vfs_fonts.js"></script>
-</head>
-<body>
-    <input type="file" id="pdfinput" accept=".pdf" multiple>
-    <button id="upload">Upload</button>
-
-    <script>
-        const pdfinput = document.getElementById("pdfinput");
-        const upload = document.getElementById("upload");
-
-        upload.addEventListener("click", function() {
-            if (pdfinput.files.length > 0) {
-                let pdfDataArray = [];
-
-                for (let i = 0; i < pdfinput.files.length; i++) {
-                    let reader = new FileReader();
-
-                    reader.onload = function() {
-                        let pdfData = new Uint8Array(reader.result);
-
-                        pdfjsLib.getDocument(pdfData).promise.then(function(pdf) {
-                            let textPromises = [];
-                            for (let j = 1; j <= pdf.numPages; j++) {
-                                textPromises.push(pdf.getPage(j).then(function(page) {
-                                    return page.getTextContent().then(function(content) {
-                                        let pageText = "";
-                                        for (let k = 0; k < content.items.length; k++) {
-                                            pageText += content.items[k].str + "\n";
-                                        }
-                                        return pageText.trim();
-                                    });
-                                }));
-                            }
-
-                            Promise.all(textPromises).then(function(pages) {
-                                let pdfText = pages.join("\n");
-
-                                let data = extractData(pdfText);
-
-                                pdfDataArray.push(data);
-
-                                if (pdfDataArray.length === pdfinput.files.length) {
-                                    let remuneracionAnual = 0;
-                                    let retencionISRAanual = 0;
-                                    pdfDataArray.forEach(function(pdfData) {
-                                        let quincenaNeta = parseFloat(pdfData["Quincena Neta"].replace(/,/g, ""));
-                                        let isr = parseFloat(pdfData["ISR"].replace(/,/g, ""));
-                                        remuneracionAnual += quincenaNeta;
-                                        retencionISRAanual += isr;
-                                    });
-
-                                    generatePDF(pdfDataArray, remuneracionAnual, retencionISRAanual);
-                                }
-                            });
-                        });
-                    };
-
-                    reader.readAsArrayBuffer(pdfinput.files[i]);
-                }
-            }
-        });
-
-        function extractData(text) {
-            const data = {};
-
-            data["Fecha de pago"] = extractFechaPago(text);
-            data["Periodo de pago"] = extractPeriodoPago(text);
-            data["Percepciones"] = extractPercepciones(text);
-            data["ISR"] = extractISR(text) || "0";
-            data["Quincena Neta"] = calculateQuincenaNeta(data["Percepciones"], data["ISR"]);
-
-            return data;
-        }
-
-        function extractPercepciones(text) {
-            const regex = /DESCUENTOS[\n\r]+([^\n\r]+)/;
-            const match = text.match(regex);
-            if (match && match[1]) {
-                return match[1].trim();
-            }
-            return "";
-        }
-
-        function extractISR(text) {
-            const regex = /IMPUESTO SOBRE LA RENTA[\n\r]+([^\n\r]+)/;
-            const match = text.match(regex);
-            if (match && match[1]) {
-                return match[1].trim();
-            }
-            return "";
-        }
-
-        function extractValue(text, keyword) {
-            const regex = new RegExp(keyword + "[\n\r]+([^\n\r]+)");
-            const match = text.match(regex);
-            if (match && match[1]) {
-                return match[1].trim();
-            }
-            return "";
-        }
-
-        function extractFechaPago(text) {
-            const regex = /NÚMERO DE SEGURIDAD SOCIAL[\n\r]+.*[\n\r]+.*[\n\r]+([^\n\r]+)/;
-            const match = text.match(regex);
-            if (match && match[1]) {
-                return match[1].trim();
-            }
-            return "";
-        }
-
-        function extractPeriodoPago(text) {
-            const regex1 = /NÚMERO DE SEGURIDAD SOCIAL[\n\r]+([^\n\r]+)/;
-            const match1 = text.match(regex1);
-            const regex2 = /FECHA DE PAGO[\n\r]+([^\n\r]+)/;
-            const match2 = text.match(regex2);
-            const periodoPago = [];
-
-            if (match1 && match1[1]) {
-                periodoPago.push(match1[1].trim());
-            }
-
-            if (match2 && match2[1]) {
-                periodoPago.push(match2[1].trim());
-            }
-
-            return periodoPago;
-        }
-
-        function calculateQuincenaNeta(percepciones, isr) {
-            const percepcionesValue = parseFloat(percepciones.replace(/,/g, ""));
-            const isrValue = parseFloat(isr.replace(/,/g, ""));
-            return (percepcionesValue - isrValue).toFixed(2);
-        }
-
-        function generatePDF(pdfDataArray, remuneracionAnual, retencionISRAanual) {
-            let documentDefinition = {
-                content: [
-                    { text: "Quincenas", style: "header" },
-                    {
-                        table: {
-                            headerRows: 1,
-                            widths: ["auto", "auto", "auto", "auto", "auto"],
-                            body: [
-                                [
-                                    { text: "Fecha de pago", style: "tableHeader" },
-                                    { text: "Periodo de pago", style: "tableHeader" },
-                                    { text: "Percepciones", style: "tableHeader" },
-                                    { text: "ISR", style: "tableHeader" },
-                                    { text: "Quincena Neta", style: "tableHeader" },
-                                ],
-                                ...pdfDataArray.map(function(pdfData) {
-                                    return [
-                                        { text: pdfData["Fecha de pago"], style: "tableCell" },
-                                        { text: pdfData["Periodo de pago"], style: "tableCell" },
-                                        { text: pdfData["Percepciones"], style: "tableCell" },
-                                        { text: pdfData["ISR"], style: "tableCell" },
-                                        { text: pdfData["Quincena Neta"], style: "tableCell" },
-                                    ];
-                                }),
-                            ],
-                        },
-                        layout: {
-                            fillColor: function(rowIndex, node, columnIndex) {
-                                return (rowIndex % 2 === 0) ? "#EEEEEE" : null;
-                            },
-                        },
-                    },
-                    { text: "Resumen", style: "header" },
-                    {
-                        table: {
-                            headerRows: 1,
-                            widths: ["auto", "auto"],
-                            body: [
-                                [
-                                    { text: "Remuneración Anual", style: "tableHeader" },
-                                    { text: "Retención ISR Anual", style: "tableHeader" },
-                                ],
-                                [
-                                    { text: remuneracionAnual.toString(), style: "tableCell" },
-                                    { text: retencionISRAanual.toString(), style: "tableCell" },
-                                ],
-                            ],
-                        },
-                        layout: {
-                            fillColor: function(rowIndex, node, columnIndex) {
-                                return (rowIndex % 2 === 0) ? "#EEEEEE" : null;
-                            },
-                        },
-                    },
-                ],
-                styles: {
-                    header: {
-                        fontSize: 18,
-                        bold: true,
-                        margin: [0, 0, 0, 10],
-                    },
-                    tableHeader: {
-                        bold: true,
-                        fontSize: 12,
-                        color: "black",
-                        fillColor: "#CCCCCC",
-                        alignment: "center",
-                    },
-                    tableCell: {
-                        fontSize: 10,
-                        color: "black",
-                        alignment: "center",
-                    },
-                },
-            };
-
-            let pdfDocGenerator = pdfMake.createPdf(documentDefinition);
-
-            pdfDocGenerator.download("datos.pdf");
-        }
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>

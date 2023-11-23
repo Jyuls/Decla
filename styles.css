@@ -1,0 +1,142 @@
+/* styles.css */
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f1f1f1;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+}
+
+#pdfinput {
+    margin-bottom: 20px;
+}
+
+#upload {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#upload:hover {
+    background-color: #45a049;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: fit-content; /* Cambiado a fit-content */
+    transition: height 0.5s; /* Ajustado la transición */
+    overflow: hidden;
+    min-height: 150px; /* Altura mínima */
+}
+
+
+#texto1, #texto2 {
+    margin-bottom: 10px;
+    
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    display: none;
+}
+
+.tableHeader {
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    background-color: #CCCCCC;
+}
+
+th, td {
+    padding: 10px; /* Ajuste del espacio interno de las celdas */
+    text-align: left; /* Alineación del texto en las celdas */
+}
+
+#total-table th, #total-table td {
+    border: 1px solid #ddd; /* Añadido un borde a las celdas de la tabla de totales */
+}
+
+#quincenas-table th, #quincenas-table td {
+    border: 1px solid #ddd; /* Añadido un borde a las celdas de la tabla de quincenas */
+}
+
+/* En tu archivo styles.css */
+
+#circular-buttons {
+    display: flex; /* Utiliza flexbox para alinear elementos */
+    justify-content: space-between; /* Coloca espacio entre los elementos */
+    width: 100%; /* Asegura que los botones ocupen todo el ancho disponible */
+    text-align: left; /* Ajusta el texto a la izquierda, no es necesario si usamos flexbox */
+    margin-top: 20px; /* Añadido un margen superior para separar de las tablas */
+    display: none;
+}
+
+#circular-buttons div {
+    display: flex; /* Utiliza flexbox para los elementos internos */
+}
+
+#circular-buttons div:first-child {
+    margin-right: auto; /* Empuja el primer botón a la izquierda */
+}
+
+#circular-buttons div:last-child {
+    margin-left: auto; /* Empuja el último botón a la derecha */
+}
+
+.circular-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#titulo {
+    font-size: 34px; /* Tamaño del título */
+    font-weight: bold;
+    margin:0px;
+}
+
+#subtitulo {
+    font-size: 18px;
+    font-weight: normal;
+    margin:0px;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+}
+
+#pdfinput {
+    margin: 0px; /* Ajusta según sea necesario */
+}
