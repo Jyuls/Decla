@@ -202,8 +202,14 @@ upload.addEventListener("click", function() {
 
             reader.readAsArrayBuffer(pdfinput.files[i]);
         }
+    } else {
+        showAlert("Error", "Primero debes cargar tus documentos");
     }
 });
+
+function showAlert(title, message) {
+    alert(`${title}\n${message}`);
+}
 
 function fillQuincenasTable(pdfDataArray) {
 
