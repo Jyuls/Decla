@@ -19,7 +19,8 @@ body {
     background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 #pdfinput {
@@ -48,13 +49,13 @@ body {
     width: fit-content; /* Cambiado a fit-content */
     transition: height 0.5s; /* Ajustado la transición */
     overflow: hidden;
-    min-height: 150px; /* Altura mínima */
+    max-height: 400px;
+    overflow-y: auto;
 }
 
 
 #texto1, #texto2 {
     margin-bottom: 10px;
-    
 }
 
 table {
@@ -62,6 +63,8 @@ table {
     width: 100%;
     margin-top: 20px;
     display: none;
+    max-height: 230px;
+    overflow-y: auto;
 }
 
 .tableHeader {

@@ -8,6 +8,7 @@ const buttons = document.getElementById("circular-buttons")
 const buttonBack = document.getElementById("button-back");
 const exportPdfButton = document.getElementById("export-pdf");
 const exportExcelButton = document.getElementById("export-excel");
+const tarjeta = document.getElementById("tarjeta");
 
 exportExcelButton.addEventListener("click", function () {
  // Obtener datos de la tabla de quincenas
@@ -195,6 +196,7 @@ upload.addEventListener("click", function() {
                             });
                             fillQuincenasTable(pdfDataArray);
                             fillTotalTable(remuneracionAnual, retencionISRAanual);
+                        
                         }
                     });
                 });
