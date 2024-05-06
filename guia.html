@@ -3,15 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decla</title>
+    <title>Guía de Usuario - Decla</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-    <div id="loader">
-        <div class="spinner"></div>
-    </div>
-    <div id="main-content"></div>
     <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#"><img src="images/logo.png" alt="Logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,19 +25,11 @@
             </ul>
         </div>
     </nav>
-
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="upload-container" onclick="document.getElementById('upload-input').click()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
-                    <h4>Haz clic aquí para subir los talones de cheque en formato PDF</h4>
-                    <p>O arrastra y suelta los archivos aquí</p>
-                </div>
-                <input type="file" id="upload-input" accept=".pdf" onchange="handleFileUpload(this.files)" multiple>
-            </div>
+    <div class="container">
+        <div class="content">
+            <h2>Guía de usuario</h2>
+            <p>¡Bienvenido a la Guía de usuario de Decla!</p>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
-    <script src="indexScripts.js"></script>
 </body>
 </html>
