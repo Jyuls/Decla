@@ -9,8 +9,44 @@ function extractDataFromPDF(text) {
     data["Periodo de pago"] = extractPeriodoPago(text);
     data["Percepciones"] = extractPercepciones(text);
     data["ISR"] = extractISR(text);
-    data["Quincena Neta"] = calculateQuincenaNeta(data["Percepciones"], data["ISR"]);
+    data["Prestaciones"] = extractPrestaciones(text);
     return data;
+}
+
+// Función para extraer prestaciones del texto del PDF
+function extractPrestaciones(text) {
+    const prestaciones = [
+        "COMPENSACIÓN NACIONAL ÚNICA",
+        "BONO AJUSTE CALENDARIO",
+        "PRIMA VACACIONAL",
+        "ESTIMULO AL DOCENTE",
+        "BONO DE VERANO",
+        "INICIO DE CICLO ESCOLAR",
+        "ESTIMULO AL DOCENTE",
+        "BONO MAGISTERIAL",
+        "BONO ANUAL SOCIAL"
+    ];
+
+    const valores = {};
+
+    prestaciones.forEach(prestacion => {
+        const regex = new RegExp(`${prestacion}\\s+([\\d,]+(?:\\.\\d{1,2})?)`, 'i');
+        const match = text.match(regex);
+        if (match) {
+            const valorNumerico = parseFloat(match[1].replace(",", ""));
+            valores[prestacion] = valorNumerico;
+        } else {
+            valores[prestacion] = 0;
+        }
+    });
+
+    const totalPrestaciones = Object.values(valores).reduce((total, valor) => total + parseFloat(valor), 0);
+    
+    if (totalPrestaciones == 0) {
+        return 0;
+    } else {
+        return totalPrestaciones.toLocaleString("es-MX", { minimumFractionDigits: 2 });
+    }
 }
 
 // Función para extraer fecha de pago del texto del PDF
@@ -52,26 +88,6 @@ function extractISR(text) {
         return match[1];
     }
     return "0";
-}
-
-// Función para calcular la quincena neta
-function calculateQuincenaNeta(percepciones, isr) {
-    const percepcionesValue = parseFloat(percepciones.replace(/,/g, ""));
-    const isrValue = parseFloat(isr.replace(/,/g, ""));
-    return (percepcionesValue - isrValue).toFixed(2);
-}
-
-// Función para insertar datos en la tabla
-function insertDataIntoTable(data, rowNum) {
-    const tableBody = document.getElementById("tablaDatos");
-
-    const newRow = tableBody.insertRow();
-    newRow.insertCell().textContent = rowNum;
-    newRow.insertCell().textContent = data["Fecha de pago"];
-    newRow.insertCell().textContent = data["Periodo de pago"];
-    newRow.insertCell().textContent = data["Percepciones"];
-    newRow.insertCell().textContent = data["ISR"];
-    newRow.insertCell().textContent = data["Quincena Neta"];
 }
 
 function ordenarPorFechaDePago(datos) {
@@ -161,75 +177,6 @@ document.getElementById("exportPDF").addEventListener("click", function() {
     generarPDF();
 });
 
-function agregarFooterTabla(totalQuincenaNeta) {
-    const table = document.getElementById("tablaDatos");
-    const tfoot = document.createElement("tfoot");
-    const totalRow = document.createElement("tr");
-
-    // Obtener el número total de columnas en la tabla
-    const numColumnas = table.rows[0].cells.length;
-
-    // Crear celdas vacías para las columnas antes del total
-    for (let i = 0; i < numColumnas - 1; i++) {
-        totalRow.appendChild(document.createElement("td"));
-    }
-
-    // Crear la celda para el total y agregarlo como última celda de la fila
-    const totalQuincenaCell = document.createElement("td");
-    totalQuincenaCell.textContent = "$" + totalQuincenaNeta.toFixed(2);
-    totalRow.appendChild(totalQuincenaCell);
-
-    // Agregar la fila al tfoot y el tfoot a la tabla
-    tfoot.appendChild(totalRow);
-    table.appendChild(tfoot);
-}
-
-// Evento para llenar la tabla al cargar la página
-document.addEventListener("DOMContentLoaded", function() {
-    // Crear un array para almacenar los datos
-    const datos = [];
-    // Iterar sobre las claves del localStorage
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        // Verificar si la clave corresponde a un documento PDF
-
-        if (key.startsWith("document")) {
-            // Leer el contenido del documento PDF del localStorage
-            const pdfContent = localStorage.getItem(key);
-            // Verificar si se encontró el contenido del PDF
-            if (pdfContent) {
-                // Extraer los datos del PDF
-                const pdfData = extractDataFromPDF(pdfContent);
-                // Agregar los datos al array
-                datos.push(pdfData);
-            }
-        }
-    }
-    // Convertir formato de fecha
-    convertirFormatoFecha(datos);
-
-    // Ordenar por fecha de pago de forma cronológica
-    ordenarPorFechaCronologica(datos);
-
-    // Revertir formato de fecha
-    revertirFormatoFecha(datos);
-
-    // Insertar los datos en la tabla
-    const tableBody = document.querySelector("tablaDatos"); // Cambiado el selector para que coincida con el tbody
-    let rowNum = 1; // Contador para el número de fila
-
-    datos.forEach(data => {
-        insertDataIntoTable(data, rowNum); // Llamar a insertDataIntoTable con el número de fila actual
-        rowNum++; // Incrementar el contador de número de fila
-    });
-
-    // Calcular y mostrar el total de quincena neta
-    const totalQuincenaNeta = datos.reduce((total, data) => total + parseFloat(data["Quincena Neta"]), 0);
-    
-    // Agregar Footer
-    agregarFooterTabla(totalQuincenaNeta);
-});
-
 // Función para generar un archivo de Excel
 function exportToExcel() {
     var table = document.getElementById('tablaDatos');
@@ -280,3 +227,126 @@ function exportToExcel() {
 document.getElementById("exportExcel").addEventListener("click", function() {
     exportToExcel();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const datos = obtenerDatosDesdeLocalStorage();
+    const percepcionesArray = obtenerPercepcionesArray(datos);
+    
+    convertirFormatoFecha(datos);
+    ordenarPorFechaCronologica(datos);
+    revertirFormatoFecha(datos);
+    insertarDatosEnTabla(datos);
+
+    const totalPrestaciones = calcularTotalPrestaciones(datos);
+    const totalPercepciones = calcularTotalPercepciones(percepcionesArray);
+    const totalISR = calcularTotalISR(datos);
+    
+    agregarFooterTabla(totalPercepciones, totalISR, totalPrestaciones);
+
+    // Calcular y mostrar la remuneración anual neta con prestaciones
+    const remuneracionConPrestaciones = Math.ceil(totalPercepciones - totalISR);
+
+    // Calcular la remuneración anual neta sin prestaciones
+    const remuneracionSinPrestaciones = Math.ceil(remuneracionConPrestaciones - parseFloat(totalPrestaciones.replace(/,/g, '')));
+
+    // Mostrar la remuneración anual neta con prestaciones en la tabla
+    document.getElementById("remuneracionConPrestaciones").textContent = remuneracionConPrestaciones.toLocaleString("es-MX");
+
+    // Mostrar la remuneración anual neta sin prestaciones en la tabla
+    document.getElementById("remuneracionSinPrestaciones").textContent = remuneracionSinPrestaciones.toLocaleString("es-MX");
+});
+
+
+
+// Función para insertar los datos en la tabla
+function insertarDatosEnTabla(datos) {
+    const tableBody = document.getElementById("tablaDatos");
+    let rowNum = 1;
+
+    datos.forEach(data => {
+        insertDataIntoTable(data, rowNum);
+        rowNum++;
+    });
+}
+
+// Función para insertar datos en la tabla
+function insertDataIntoTable(data, rowNum) {
+    const tableBody = document.getElementById("tablaDatos");
+
+    const newRow = tableBody.insertRow();
+    newRow.insertCell().textContent = rowNum;
+    newRow.insertCell().textContent = data["Fecha de pago"];
+    newRow.insertCell().textContent = data["Periodo de pago"];
+    newRow.insertCell().textContent = data["Percepciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    newRow.insertCell().textContent = data["ISR"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    newRow.insertCell().textContent = data["Prestaciones"] === 0 ? "0" : data["Prestaciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+// Función para agregar el footer a la tabla
+function agregarFooterTabla(totalPercepciones, totalISR, totalPrestaciones) {
+    const table = document.getElementById("tablaDatos");
+    const tfoot = document.createElement("tfoot");
+    const totalRow = document.createElement("tr");
+
+    const numColumnas = table.rows[0].cells.length;
+
+    for (let i = 0; i < numColumnas - 3; i++) {
+        totalRow.appendChild(document.createElement("td"));
+    }
+
+    const totalPercepcionesCell = document.createElement("td");
+    totalPercepcionesCell.textContent = totalPercepciones.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    totalRow.appendChild(totalPercepcionesCell);
+
+    const totalISRCell = document.createElement("td");
+    totalISRCell.textContent = totalISR.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    totalRow.appendChild(totalISRCell);
+
+    const totalPrestacionesCell = document.createElement("td");
+    totalPrestacionesCell.textContent = totalPrestaciones === 0 ? "0" : totalPrestaciones.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    totalRow.appendChild(totalPrestacionesCell);
+
+    tfoot.appendChild(totalRow);
+    table.appendChild(tfoot);
+}
+
+// Función para obtener los datos del LocalStorage
+function obtenerDatosDesdeLocalStorage() {
+    const datos = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key.startsWith("document")) {
+            const pdfContent = localStorage.getItem(key);
+            if (pdfContent) {
+                const pdfData = extractDataFromPDF(pdfContent);
+                datos.push(pdfData);
+            }
+        }
+    }
+    return datos;
+}
+
+// Función para obtener un array de percepciones
+function obtenerPercepcionesArray(datos) {
+    return datos.map(data => parseFloat(data["Percepciones"].replace(/,/g, "")));
+}
+
+// Función para calcular el total de percepciones
+function calcularTotalPercepciones(percepcionesArray) {
+    return percepcionesArray.reduce((total, percepcion) => total + percepcion, 0);
+}
+
+// Función para calcular el total del ISR
+function calcularTotalISR(datos) {
+    return datos.reduce((total, data) => total + parseFloat(data["ISR"]), 0);
+}
+
+// Función para calcular el total de prestaciones
+function calcularTotalPrestaciones(datos) {
+    const totalPrestaciones = datos.reduce((total, data) => {
+        const prestacionesString = typeof data["Prestaciones"] === 'string' ? data["Prestaciones"] : data["Prestaciones"].toString();
+        const percepcionesSinComa = prestacionesString.replace(/,/g, "");
+        return total + parseFloat(percepcionesSinComa);
+    }, 0);
+    return totalPrestaciones.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
