@@ -338,8 +338,10 @@ function calcularTotalPercepciones(percepcionesArray) {
 
 // Función para calcular el total del ISR
 function calcularTotalISR(datos) {
-    return datos.reduce((total, data) => total + parseFloat(data["ISR"]), 0);
+    const totalISR = datos.reduce((total, data) => total + parseFloat(data["ISR"].replace(/,/g, '')), 0);
+    return totalISR;
 }
+
 
 // Función para calcular el total de prestaciones
 function calcularTotalPrestaciones(datos) {
