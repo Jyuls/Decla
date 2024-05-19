@@ -1,10 +1,16 @@
 /* Estilos para el cuerpo y la barra de navegación */
 body {
     background-color: #d8e3e7;
+    padding-top: 56px; /* Espacio para la barra de navegación fija */
 }
 
 .navbar {
-    background-color: #041331;
+    background-color: white;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030; /* Asegúrate de que la barra de navegación esté por encima de otros elementos */
 }
 
 .navbar-brand img {
@@ -16,18 +22,26 @@ body {
     filter: brightness(0.8);
 }
 
-.navbar-nav .nav-link {
-    color: #ffffff;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
 .navbar-light .navbar-nav .nav-link {
-    color: #ffffff;
+    color: black;
+    font-weight: lighter;
 }
 
+/* Para cambiar el color del texto al hacer hover */
 .navbar-light .navbar-nav .nav-link:hover {
-    color: #8ab17d;
+    color: #003cff; 
+    border-bottom: 2px solid #003cff; 
+}
+
+/* Para resaltar el elemento actual */
+.navbar-light .navbar-nav .inicio > .nav-link {
+    color: black; 
+    border-bottom: 2px solid black; 
+    font-weight: bold;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 12px; /* Ajusta el valor según tu preferencia */
 }
 
 /* Estilos para el área de carga */
@@ -47,55 +61,6 @@ body {
 
 #upload-input {
     display: none;
-}
-
-/* Estilos para el contenido */
-.content {
-    text-align: center;
-    margin-top: 50px;
-}
-
-/* Estilos para la tabla */
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid #041331; /* Cambiar el color del borde a tu color principal */
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #2a9d8f; /* Cambiar el color de fondo del encabezado a tu color secundario */
-    color: #ffffff; /* Cambiar el color del texto del encabezado a blanco */
-}
-
-/* Cambiar el color de fondo de las filas pares */
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Cambiar a un tono de gris */
-}
-
-/* Cambiar el color de fondo de las filas impares */
-tr:nth-child(odd) {
-    background-color: #ffffff; /* Cambiar a blanco */
-}
-
-/* Cambiar el color de fondo al hacer hover */
-tr:hover {
-    background-color: #8ab17d; /* Cambiar el color de fondo al hacer hover a tu tono de verde */
-}
-
-#loader {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    z-index: 1000; /* Asegúrate de que el loader esté por encima de todo */
 }
 
 /* Estilos para el spinner de carga */
@@ -127,4 +92,160 @@ tr:hover {
 .gray-out {
     filter: grayscale(100%); /* Convertir a tono gris */
     pointer-events: none; /* Deshabilitar eventos del mouse */
+}
+
+.container {
+    padding-top: 56px; /* Espacio superior ajustado para la barra de navegación fija */
+    padding-bottom: 50px; /* Espacio inferior */
+}
+
+.card {
+    background-color: #f8f9fa; /* Color de fondo de la tarjeta */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 30px; /* Espaciado interno */
+}
+
+.important-text {
+    font-weight: bold; /* Negrita */
+}
+
+.btn {
+    border-radius: 30px; /* Bordes redondeados */
+    color: #fff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-transform: uppercase; /* Mayúsculas */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+.btn-primary {
+    background-color: #000; /* Color de fondo del botón primario */
+    border-color: #000; /* Color del borde del botón primario */
+    padding: 15px 30px; /* Espaciado interno */
+    font-size: 18px; /* Tamaño del texto */
+}
+
+.btn-success {
+    background-color: #000; /* Color de fondo del botón de éxito */
+    border-color: #000; /* Color del borde del botón de éxito */
+    padding: 15px 30px; /* Espaciado interno */
+    font-size: 18px; /* Tamaño del texto */
+    margin-top: 20px; /* Margen superior */
+}
+
+.btn:hover {
+    background-color: #555; /* Cambio de color al pasar el ratón */
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    height: calc(100vh - 56px); /* Altura ajustada para la barra de navegación fija */
+    position: fixed;
+    top: 76px; /* Espacio ajustado para la barra de navegación con un margen */
+    overflow-y: auto;
+}
+
+
+.sidebar a {
+    display: block;
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.sidebar a:hover {
+    background-color: #ddd;
+    color: #000;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.content p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.content img {
+    max-width: 100%; /* Ajustar la imagen al ancho máximo del contenedor */
+    height: auto; /* Asegurar que la altura se ajuste proporcionalmente */
+    margin: auto; /* Centrar la imagen dentro del contenedor */
+}
+
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    z-index: 2000; /* Asegúrate de que el loader esté por encima de todo */
+}
+
+.gray-out {
+    filter: grayscale(100%); /* Convertir a tono gris */
+    pointer-events: none; /* Deshabilitar eventos del mouse */
+}
+
+/* Estilos para el spinner de carga */
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 12px solid #f3f3f3; /* Aumentar el grosor del borde */
+    border-top: 12px solid #3498db; /* Aumentar el grosor del borde */
+    border-radius: 50%;
+    width: 100px; /* Ajustar el tamaño del icono de carga */
+    height: 100px; /* Ajustar el tamaño del icono de carga */
+    animation: spin 2s linear infinite;
+    z-index: 1001; /* Asegurar que el spinner esté por encima del fondo gris */
+    margin: auto; /* Centrar horizontalmente */
+    top: 0; /* Posición en la parte superior */
+    left: 0; /* Posición en la parte izquierda */
+    right: 0; /* Posición en la parte derecha */
+    bottom: 0; /* Posición en la parte inferior */
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos para la tabla */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid white; 
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #2a9d8f; /* Cambiar el color de fondo del encabezado a tu color secundario */
+    color: #ffffff; /* Cambiar el color del texto del encabezado a blanco */
+}
+
+/* Cambiar el color de fondo de las filas pares */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Cambiar a un tono de gris */
+}
+
+/* Cambiar el color de fondo de las filas impares */
+tr:nth-child(odd) {
+    background-color: #ffffff; /* Cambiar a blanco */
+}
+
+/* Cambiar el color de fondo al hacer hover */
+tr:hover {
+    background-color: #8ab17d; /* Cambiar el color de fondo al hacer hover a tu tono de verde */
 }

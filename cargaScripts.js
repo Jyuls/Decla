@@ -2,7 +2,6 @@ async function handleFileUpload(files) {
     if (files.length > 0) {
         localStorage.clear();
         showLoader(); // Mostrar el loader y aplicar efecto de tono gris al contenido
-        document.getElementById("main-content").classList.add("gray-out");
 
         try {
             // Procesar y guardar archivos en el Local Storage

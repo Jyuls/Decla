@@ -24,7 +24,7 @@ function extractPrestaciones(text) {
         "INICIO DE CICLO ESCOLAR",
         "ESTIMULO AL DOCENTE",
         "BONO MAGISTERIAL",
-        "BONO ANUAL SOCIAL"
+        "BONO ANUAL SOCIAL",
     ];
 
     const valores = {};
@@ -72,10 +72,11 @@ function extractPeriodoPago(text) {
 
 // Función para extraer percepciones del texto del PDF
 function extractPercepciones(text) {
-    const regex = /\b\d{1,3}(?:,\d{3})*(?:\.\d+)?\b/g;
+    // El nuevo regex incluye un punto decimal obligatorio en los valores numéricos
+    const regex = /\b\d{1,3}(?:,\d{3})*\.\d{2}\b/g;
     const match = text.match(regex);
-    if (match && match[0]) {
-        return match[5];
+    if (match && match.length > 0) {
+        return match[1]; // Ajusta el índice según la posición del valor correcto
     }
     return "";
 }
