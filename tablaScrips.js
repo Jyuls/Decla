@@ -1,7 +1,3 @@
-document.getElementById("goBack").addEventListener("click", function() {
-    window.location.href = "index.html";
-});
-
 // Función para extraer datos del documento PDF
 function extractDataFromPDF(text) {
     const data = {};

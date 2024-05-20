@@ -107,9 +107,8 @@ body {
 }
 
 .important-text {
-    font-weight: bold; /* Negrita */
+    font-weight: bold; 
 }
-
 .btn {
     border-radius: 30px; /* Bordes redondeados */
     color: #fff; /* Color del texto */
@@ -158,12 +157,6 @@ body {
 .sidebar a:hover {
     background-color: #ddd;
     color: #000;
-}
-
-.content {
-    margin-left: 250px;
-    padding: 20px;
-    flex-grow: 1;
 }
 
 .content p{
@@ -231,21 +224,76 @@ th, td {
 }
 
 th {
-    background-color: #2a9d8f; /* Cambiar el color de fondo del encabezado a tu color secundario */
-    color: #ffffff; /* Cambiar el color del texto del encabezado a blanco */
+    background-color: #2a9d8f; 
+    color: #ffffff;
 }
 
-/* Cambiar el color de fondo de las filas pares */
 tr:nth-child(even) {
-    background-color: #f2f2f2; /* Cambiar a un tono de gris */
+    background-color: #f2f2f2;
 }
 
-/* Cambiar el color de fondo de las filas impares */
 tr:nth-child(odd) {
-    background-color: #ffffff; /* Cambiar a blanco */
+    background-color: #ffffff; 
 }
 
-/* Cambiar el color de fondo al hacer hover */
 tr:hover {
-    background-color: #8ab17d; /* Cambiar el color de fondo al hacer hover a tu tono de verde */
+    background-color: #8ab17d; 
 }
+
+
+body {
+    padding-top: 76px;
+}
+.main-content {
+    display: flex;
+}
+
+.content {
+    margin-left: 270px;
+    padding: 20px;
+    flex-grow: 1;
+}
+h2 {
+    margin-top: 40px;
+    padding-bottom: 10px;
+}
+h3 {
+    margin-top: 30px;
+    padding-bottom: 5px;
+}
+.note, .caution {
+    border: 2px solid;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 2px solid;
+}
+.note {
+    border-color: #007bff;
+}
+.caution {
+    border-color: #ffc107;
+}
+
+/* Estilos para los botones de exportar PDF y Excel */
+.export-btn {
+    border-radius: 30px; /* Bordes redondeados */
+    color: #fff; /* Color del texto */
+    font-weight: bold; /* Negrita */
+    text-transform: uppercase; /* Mayúsculas */
+    transition: background-color 0.3s; /* Transición suave */
+    margin: 5px; /* Ajusta el margen derecho según sea necesario */
+    padding: 10px 20px; /* Espaciado interno */
+    font-size: 16px; /* Tamaño del texto */
+}
+
+.export-pdf-btn {
+    background-color: #FF5733; /* Color de fondo rojo */
+    border-color: #FF5733; /* Color del borde */
+}
+
+.export-excel-btn {
+    background-color: #28A745; /* Color de fondo verde */
+    border-color: #28A745; /* Color del borde */
+}
+
