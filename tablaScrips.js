@@ -72,7 +72,8 @@ function extractPercepciones(text) {
     const regex = /\b\d{1,3}(?:,\d{3})*\.\d{2}\b/g;
     const match = text.match(regex);
     if (match && match.length > 0) {
-        return match[1]; // Ajusta el índice según la posición del valor correcto
+        match.sort((a, b) => parseFloat(b.replace(/,/g, '')) - parseFloat(a.replace(/,/g, '')));
+        return match[0]; // Ajusta el índice según la posición del valor correcto
     }
     return "";
 }
