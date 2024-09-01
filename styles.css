@@ -1,298 +1,263 @@
-/* Estilos para el cuerpo y la barra de navegación */
+/* General Styles */
 body {
-    background-color: #d8e3e7;
-    padding-top: 56px; /* Espacio para la barra de navegación fija */
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.navbar {
-    background-color: white;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1030; /* Asegúrate de que la barra de navegación esté por encima de otros elementos */
+/* Navbar */
+header {
+    background-color: #000;
+    padding: 20px;
 }
 
-.navbar-brand img {
-    height: 40px;
-    width: auto;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.navbar-brand:hover img {
-    filter: brightness(0.8);
-}
-
-.navbar-light .navbar-nav .nav-link {
-    color: black;
-    font-weight: lighter;
-}
-
-/* Para cambiar el color del texto al hacer hover */
-.navbar-light .navbar-nav .nav-link:hover {
-    color: #003cff; 
-    border-bottom: 2px solid #003cff; 
-}
-
-/* Para resaltar el elemento actual */
-.navbar-light .navbar-nav .inicio > .nav-link {
-    color: black; 
-    border-bottom: 2px solid black; 
+.logo {
+    color: #fff;
+    font-size: 28px;
     font-weight: bold;
 }
 
-.navbar-nav .nav-item {
-    margin-right: 12px; /* Ajusta el valor según tu preferencia */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
 }
 
-/* Estilos para el área de carga */
-.upload-container {
-    text-align: center;
-    padding: 20px;
-    border: 2px dashed #2a9d8f;
-    border-radius: 10px;
-    background-color: #ffffff;
-    cursor: pointer;
-    transition: border 0.3s;
-}
-
-.upload-container:hover {
-    border-color: #8ab17d;
-}
-
-#upload-input {
-    display: none;
-}
-
-/* Estilos para el spinner de carga */
-.spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 12px solid #f3f3f3; /* Aumentar el grosor del borde */
-    border-top: 12px solid #3498db; /* Aumentar el grosor del borde */
-    border-radius: 50%;
-    width: 100px; /* Ajustar el tamaño del icono de carga */
-    height: 100px; /* Ajustar el tamaño del icono de carga */
-    animation: spin 2s linear infinite;
-    z-index: 1001; /* Asegurar que el spinner esté por encima del fondo gris */
-    margin: auto; /* Centrar horizontalmente */
-    top: 0; /* Posición en la parte superior */
-    left: 0; /* Posición en la parte izquierda */
-    right: 0; /* Posición en la parte derecha */
-    bottom: 0; /* Posición en la parte inferior */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Aplicar efecto de tono gris al contenido detrás del loader */
-.gray-out {
-    filter: grayscale(100%); /* Convertir a tono gris */
-    pointer-events: none; /* Deshabilitar eventos del mouse */
-}
-
-.container {
-    padding-top: 56px; /* Espacio superior ajustado para la barra de navegación fija */
-    padding-bottom: 50px; /* Espacio inferior */
-}
-
-.card {
-    background-color: #f8f9fa; /* Color de fondo de la tarjeta */
-    border: none; /* Sin borde */
-    border-radius: 10px; /* Bordes redondeados */
-    padding: 30px; /* Espaciado interno */
-}
-
-.important-text {
-    font-weight: bold; 
-}
-.btn {
-    border-radius: 30px; /* Bordes redondeados */
-    color: #fff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-transform: uppercase; /* Mayúsculas */
-    transition: background-color 0.3s; /* Transición suave */
-}
-
-.btn-primary {
-    background-color: #000; /* Color de fondo del botón primario */
-    border-color: #000; /* Color del borde del botón primario */
-    padding: 15px 30px; /* Espaciado interno */
-    font-size: 18px; /* Tamaño del texto */
-}
-
-.btn-success {
-    background-color: #000; /* Color de fondo del botón de éxito */
-    border-color: #000; /* Color del borde del botón de éxito */
-    padding: 15px 30px; /* Espaciado interno */
-    font-size: 18px; /* Tamaño del texto */
-    margin-top: 20px; /* Margen superior */
-}
-
-.btn:hover {
-    background-color: #555; /* Cambio de color al pasar el ratón */
-}
-
-.sidebar {
-    width: 250px;
-    background-color: #f8f9fa;
-    padding: 20px;
-    height: calc(100vh - 56px); /* Altura ajustada para la barra de navegación fija */
-    position: fixed;
-    top: 76px; /* Espacio ajustado para la barra de navegación con un margen */
-    overflow-y: auto;
-}
-
-.sidebar a {
-    display: block;
-    color: #333;
-    padding: 10px;
+.nav-links li a {
+    color: #fff;
     text-decoration: none;
+    font-size: 18px;
+    padding: 10px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    border-radius: 5px; /* Esquinas redondeadas */
 }
 
-.sidebar a:hover {
-    background-color: #ddd;
+.nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.8);
     color: #000;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.content p{
-    margin-bottom: 10px;
-    margin-top: 10px;
+.nav-links li a.active {
+    background-color: #fff;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px; /* Esquinas redondeadas para el botón activo */
 }
 
-.content img {
-    max-width: 100%; /* Ajustar la imagen al ancho máximo del contenedor */
-    height: auto; /* Asegurar que la altura se ajuste proporcionalmente */
-    margin: auto; /* Centrar la imagen dentro del contenedor */
+/* Hero Section */
+.hero {
+    background-image: url('indexFondo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #000;
+    padding: 100px 20px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 47vh;
 }
 
-#loader {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    z-index: 2000; /* Asegúrate de que el loader esté por encima de todo */
+.content-left {
+    max-width: 1000px;
+    margin-left: 50px;
 }
 
-.gray-out {
-    filter: grayscale(100%); /* Convertir a tono gris */
-    pointer-events: none; /* Deshabilitar eventos del mouse */
-}
-
-/* Estilos para el spinner de carga */
-.spinner {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 12px solid #f3f3f3; /* Aumentar el grosor del borde */
-    border-top: 12px solid #3498db; /* Aumentar el grosor del borde */
-    border-radius: 50%;
-    width: 100px; /* Ajustar el tamaño del icono de carga */
-    height: 100px; /* Ajustar el tamaño del icono de carga */
-    animation: spin 2s linear infinite;
-    z-index: 1001; /* Asegurar que el spinner esté por encima del fondo gris */
-    margin: auto; /* Centrar horizontalmente */
-    top: 0; /* Posición en la parte superior */
-    left: 0; /* Posición en la parte izquierda */
-    right: 0; /* Posición en la parte derecha */
-    bottom: 0; /* Posición en la parte inferior */
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Estilos para la tabla */
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th, td {
-    border: 1px solid white; 
-    padding: 8px;
+.hero h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
-th {
-    background-color: #2a9d8f; 
-    color: #ffffff;
+.hero p {
+    font-size: 24px;
+    margin-bottom: 30px;
+    text-align: left;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-tr:nth-child(odd) {
-    background-color: #ffffff; 
-}
-
-tr:hover {
-    background-color: #8ab17d; 
-}
-
-
-body {
-    padding-top: 76px;
-}
-.main-content {
+.buttons {
+    text-align: left;
     display: flex;
+    flex-direction: column;
 }
 
-.content {
-    padding-left: 280px;
-    padding-right: 350px;
-    flex-grow: 1;
+.buttons .button {
+    text-decoration: none;
+    font-size: 22px;
+    padding: 12px 30px;
+    margin: 10px 0;
+    border-radius: 30px; /* Esquinas redondeadas */
+    display: inline-block;
+    width: fit-content;
 }
 
-h2 {
-    margin-top: 40px;
-    padding-bottom: 10px;
-}
-h3 {
-    margin-top: 30px;
-    padding-bottom: 5px;
-}
-.note, .caution {
-    border: 2px solid;
-    padding: 15px;
-    margin: 20px 0;
-    border-radius: 5px;
-    border: 2px solid;
-}
-.note {
-    border-color: #007bff;
-}
-.caution {
-    border-color: #ffc107;
+/* Botón superior */
+.button.light {
+    background-color: rgba(0, 0, 0, 0.6); /* Base semitransparente */
+    color: #fff;
+    transition: background-color 0.3s;
 }
 
-/* Estilos para los botones de exportar PDF y Excel */
-.export-btn {
-    border-radius: 30px; /* Bordes redondeados */
-    color: #fff; /* Color del texto */
-    font-weight: bold; /* Negrita */
-    text-transform: uppercase; /* Mayúsculas */
-    transition: background-color 0.3s; /* Transición suave */
-    margin: 5px; /* Ajusta el margen derecho según sea necesario */
-    padding: 10px 20px; /* Espaciado interno */
-    font-size: 16px; /* Tamaño del texto */
+.button.light:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
+    color: #000;
 }
 
-.export-pdf-btn {
-    background-color: #FF5733; /* Color de fondo rojo */
-    border-color: #FF5733; /* Color del borde */
+/* Botón inferior */
+.button.dark {
+    background-color: #000; /* Base negra sólida */
+    color: #fff;
+    transition: background-color 0.3s;
 }
 
-.export-excel-btn {
-    background-color: #28A745; /* Color de fondo verde */
-    border-color: #28A745; /* Color del borde */
+.button.dark:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
+    color: #000;
+}
+
+/* Footer */
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: auto;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-links {
+    font-size: 18px;
+}
+
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: color 0.3s, box-shadow 0.3s;
+    border-radius: 5px; /* Esquinas redondeadas */
+    padding: 5px; /* Ajusta el padding para que el sombreado se vea correctamente */
+}
+
+.footer-links a:hover {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.footer-logo {
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+/* Paquetes Page */
+/* Paquetes Section */
+.paquete-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Espacio entre las tarjetas */
+    padding: 50px;
+    flex-wrap: wrap;
+    max-width: 1200px; /* Limita el ancho máximo para mantener las tarjetas centradas */
+    margin: 0 auto; /* Centra el contenedor de las tarjetas */
+}
+
+.paquete {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    max-width: 300px; /* Ajusta el ancho máximo de cada tarjeta */
+}
+
+.paquete img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.paquete h2 {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.paquete p {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.paquete .button {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 30px; /* Esquinas redondeadas */
+    display: inline-block;
+    color: #fff;
+    background-color: #000; /* Color del botón */
+    transition: background-color 0.3s;
+}
+
+.paquete .button:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
+    color: #000;
+}
+
+/* Confirmación de Pago */
+.confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    text-align: center;
+    min-height: 50vh;
+}
+
+.confirmation-icon {
+    font-size: 100px;
+    color: #4CAF50; /* Verde para indicar éxito */
+    margin-bottom: 20px;
+}
+
+.confirmation h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.confirmation p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.confirmation .button {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 30px; /* Esquinas redondeadas */
+    color: #fff;
+    background-color: #000; /* Color del botón */
+    transition: background-color 0.3s;
+}
+
+.confirmation .button:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
+    color: #000;
 }

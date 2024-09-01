@@ -18,11 +18,11 @@ async function handleFileUpload(files) {
 }
 
 async function procesarArchivos(files) {
-    // Iterar sobre cada archivo seleccionado
+    // Iterar sobre cada archivo seleccionado POR EL USUARIO
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
         
-        // Crear un lector de archivos
+        // Crear un lector de archivos PDF Y EXCEL
         const reader = new FileReader();
         
         // Función que se ejecuta cuando se carga el archivo
