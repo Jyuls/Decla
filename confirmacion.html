@@ -8,17 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Importar el navbar -->
     <header>
-        <nav>
-            <div class="logo">Decla</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="paquetes.html">Servicios</a></li>
-                <li><a href="carga.html">Herramientas</a></li>
-                <li><a href="guia.html">Tutoriales</a></li>
-            </ul>
-        </nav>
+        <div id="navbar-container"></div> 
     </header>
 
     <main>
@@ -32,18 +23,26 @@
             <a href="index.html" class="button">Volver al Inicio</a>
         </div>
     </main>
-
-    <!-- Importar el footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#">Política de privacidad</a>
-                <a href="#">Términos y Condiciones</a>
-            </div>
-            <div class="footer-logo">
-                <p>&copy; 2024 Decla</p>
-            </div>
-        </div>
+        <div id="footer-container"></div> 
     </footer>
+    
+    <script>
+        // Cargar el contenido de la navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar la navbar:', error));
+
+        // Cargar el contenido del footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script>
 </body>
 </html>

@@ -7,49 +7,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Importar el navbar -->
     <header>
-        <nav>
-            <div class="logo">Decla</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="paquetes.html" class="active">Servicios</a></li>
-                <li><a href="carga.html">Herramientas</a></li>
-                <li><a href="guia.html">Tutoriales</a></li>
-            </ul>
-        </nav>
+        <div id="navbar-container"></div> 
     </header>
 
     <main>
         <div class="paquete-container">
             <div class="paquete">
-                <img src="P1.jpg" alt="Declaración Patrimonial para 1 Plaza">
+                <img src="p1.jpg" alt="Declaración Patrimonial para 1 Plaza">
                 <h2>Declaración Patrimonial para 1 Plaza</h2>
                 <p>Costo: $350MXN</p>
                 <p>Se debe proporcionar usuario y contraseña de DeclaraNet y Fone</p>
                 <a href="https://buy.stripe.com/test_bIY7wya9l2JOfK0bII" class="button">Contratar Servicio</a>
             </div>
             <div class="paquete">
-                <img src="P2.jpg" alt="Declaración Patrimonial para 2 Plazas">
+                <img src="p2.jpg" alt="Declaración Patrimonial para 2 Plazas">
                 <h2>Declaración Patrimonial para 2 Plazas</h2>
                 <p>Costo: $450MXN</p>
                 <p>Se debe proporcionar usuario y contraseña de DeclaraNet y Fone</p>
-                <a href="#" class="button">Contratar Servicio</a>
+                <a href="https://buy.stripe.com/test_6oE04695h704apG6op" class="button">Contratar Servicio</a>
             </div>
         </div>
     </main>
 
-    <!-- Importar el footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#">Política de privacidad</a>
-                <a href="#">Términos y Condiciones</a>
-            </div>
-            <div class="footer-logo">
-                <p>&copy; 2024 Decla</p>
-            </div>
-        </div>
+        <div id="footer-container"></div> 
     </footer>
+
+    <script>
+        // Cargar el contenido de la navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar la navbar:', error));
+
+        // Cargar el contenido del footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script>
 </body>
 </html>

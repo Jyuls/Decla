@@ -1,85 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="google-adsense-account" content="ca-pub-8927194984933092">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Decla</title> 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Decla</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="Logo"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto"> 
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="guia.html">Como hacer la declaración?</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="paquetes.html">Paquetes</a>
-                </li>
-                <li class="nav-item active inicio">
-                    <a class="nav-link" href="carga.html">Calculadora de Remuneración</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <header>
+        <div id="navbar-container"></div> 
+    </header>
 
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-4">
                 <h2 class="text-center">Totales</h2>
-                <table id="tablaRemuneracion" class="table">
-                    <thead>
-                        <tr>
-                            <th>Concepto</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Remuneración anual neta sin prestaciones</td>
-                            <td id="remuneracionSinPrestaciones">$0.00</td>
-                        </tr>
-                        <tr>
-                            <td>Remuneración anual neta con prestaciones</td>
-                            <td id="remuneracionConPrestaciones">$0.00</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button class="export-btn export-excel-btn" id="exportExcel">Exportar a Excel</button>
-                <button class="export-btn export-pdf-btn" id="exportPDF">Exportar a PDF</button>
+                <div class="table-wrapper">
+                    <table id="tablaRemuneracion" class="table">
+                        <thead>
+                            <tr>
+                                <th>Concepto</th>
+                                <th class="centrar-texto">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Remuneración anual neta sin prestaciones</td>
+                                <td id="remuneracionSinPrestaciones" class="centrar-texto">$0.00</td>
+                            </tr>
+                            <tr>
+                                <td>Remuneración anual neta con prestaciones</td>
+                                <td id="remuneracionConPrestaciones" class="centrar-texto">$0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="button-container">
+                        <button class="square-btn" id="exportExcel">
+                            <img src="excel.png" alt="Excel Icon" class="button-icon">
+                        </button>
+                        <button class="square-btn" id="exportPDF">
+                            <img src="pdf.png" alt="PDF Icon" class="button-icon">
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="col-md-8">
                 <h2 class="text-center">Declaración Patrimonial</h2>
-                <table id="tablaDatos">       
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Fecha de pago</th>
-                            <th>Periodo de pago</th>
-                            <th>Percepciones</th>
-                            <th>ISR</th>
-                            <th>Prestaciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="pdfData">
-                    </tbody>
-                </table>
+                <div class="table-wrapper">
+                    <table id="tablaDatos" class="table">       
+                        <thead>
+                            <tr>
+                                <th class="centrar-texto">#</th>
+                                <th class="centrar-texto">Fecha de pago</th>
+                                <th class="centrar-texto">Periodo de pago</th>
+                                <th class="centrar-texto">Percepciones</th>
+                                <th class="centrar-texto">ISR</th>
+                                <th class="centrar-texto">Prestaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pdfData">
+                        </tbody>
+                        <tfoot id="tfoot">
+                            <tr class="table-row">
+                                <td class="table-cell centrar-texto"></td>
+                                <td class="table-cell centrar-texto"></td>
+                                <td class="table-cell centrar-texto"></td>
+                                <td id="totalPercepciones" class="centrar-texto">$0.0</td>
+                                <td id="totalISR" class="centrar-texto">$0.0</td>
+                                <td id="totalPrestaciones" class="centrar-texto">$0.0</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+    <footer>
+        <div id="footer-container"></div> 
+    </footer>
+
+    <script>
+        // Cargar el contenido de la navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar la navbar:', error));
+
+        // Cargar el contenido del footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script> 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>  

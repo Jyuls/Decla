@@ -58,7 +58,7 @@ async function procesarArchivos(files) {
 }
 
 function showLoader() {
-    document.getElementById("loader").style.display = "block";
+    document.getElementById("loader").style.display = "flex";
 }
 
 function hideLoader() {

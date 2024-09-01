@@ -126,49 +126,40 @@ function ordenarPorFechaCronologica(datos) {
 
 // Función para generar el PDF
 function generarPDF() {
-    var tablaDatos = document.getElementById('tablaDatos');
-    var tablaData = [];
+    // Obtener datos de la tabla
+    const tabla = document.getElementById('tablaDatos');
+    const rows = tabla.querySelectorAll('tbody tr');
     
-    // Agregar encabezados
-    var headerRow = [];
+    const body = [];
     
-    for (var i = 0; i < tablaDatos.rows[0].cells.length; i++) {
-        headerRow.push({ text: tablaDatos.rows[0].cells[i].textContent, style: 'tableHeader' });
-    }
-    tablaData.push(headerRow);
+    // Agregar encabezado
+    body.push([
+        'Número', 'Fecha de pago', 'Periodo de pago', 'Percepciones', 'ISR', 'Prestaciones'
+    ]);
+    
+    // Agregar filas de datos
+    rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        body.push(Array.from(cells).map(cell => cell.textContent.trim()));
+    });
 
-    // Agregar datos
-    for (var i = 1; i < tablaDatos.rows.length; i++) {
-        var rowData = [];
-        for (var j = 0; j < tablaDatos.rows[i].cells.length; j++) {
-            rowData.push(tablaDatos.rows[i].cells[j].textContent);
-        }
-        tablaData.push(rowData);
-    }
-
-    // Crear el documento
-    var docDefinition = {
+    // Definir el documento PDF
+    const docDefinition = {
         content: [
             {
                 table: {
                     headerRows: 1,
-                    body: tablaData
+                    widths: ['*', '*', '*', '*', '*', '*'], // Asegúrate de que los anchos coincidan con el número de columnas
+                    body: body
                 }
             }
-        ],
-        styles: {
-            tableHeader: {
-                bold: true,
-                fontSize: 12,
-                color: "black",
-                fillColor: "#CCCCCC",
-            }
-        }
+        ]
     };
-
-    // Generar el PDF
+    
+    // Generar y abrir el PDF
     pdfMake.createPdf(docDefinition).open();
 }
+
 
 // Llamar a la función generarPDF cuando se haga clic en el botón "Generar PDF"
 document.getElementById("exportPDF").addEventListener("click", function() {
@@ -254,8 +245,6 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("remuneracionSinPrestaciones").textContent = remuneracionSinPrestaciones.toLocaleString("es-MX");
 });
 
-
-
 // Función para insertar los datos en la tabla
 function insertarDatosEnTabla(datos) {
     const tableBody = document.getElementById("tablaDatos");
@@ -269,44 +258,87 @@ function insertarDatosEnTabla(datos) {
 
 // Función para insertar datos en la tabla
 function insertDataIntoTable(data, rowNum) {
-    const tableBody = document.getElementById("tablaDatos");
+    const tableBody = document.getElementById("pdfData"); // Asegúrate de que el ID sea correcto
 
     const newRow = tableBody.insertRow();
-    newRow.insertCell().textContent = rowNum;
-    newRow.insertCell().textContent = data["Fecha de pago"];
-    newRow.insertCell().textContent = data["Periodo de pago"];
-    newRow.insertCell().textContent = data["Percepciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    newRow.insertCell().textContent = data["ISR"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    newRow.insertCell().textContent = data["Prestaciones"] === 0 ? "0" : data["Prestaciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    newRow.classList.add("table-row"); // Agrega la clase a la fila
+
+    const cell1 = newRow.insertCell();
+    cell1.textContent = rowNum;
+    cell1.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
+
+    const cell2 = newRow.insertCell();
+    cell2.textContent = data["Fecha de pago"];
+    cell2.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
+
+    const cell3 = newRow.insertCell();
+    cell3.textContent = data["Periodo de pago"];
+    cell3.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
+
+    const cell4 = newRow.insertCell();
+    cell4.textContent = data["Percepciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    cell4.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
+
+    const cell5 = newRow.insertCell();
+    cell5.textContent = data["ISR"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    cell5.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
+
+    const cell6 = newRow.insertCell();
+    cell6.textContent = data["Prestaciones"] === 0 ? "0" : data["Prestaciones"].toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    cell6.classList.add("table-cell", "centrar-texto"); // Agrega la clase a la celda
 }
 
-// Función para agregar el footer a la tabla
+
 function agregarFooterTabla(totalPercepciones, totalISR, totalPrestaciones) {
-    const table = document.getElementById("tablaDatos");
-    const tfoot = document.createElement("tfoot");
-    const totalRow = document.createElement("tr");
-
-    const numColumnas = table.rows[0].cells.length;
-
-    for (let i = 0; i < numColumnas - 3; i++) {
-        totalRow.appendChild(document.createElement("td"));
+    let table = document.getElementById("tablaDatos");
+    if (!table) {
+        table = document.createElement("table");
+        table.id = "tablaDatos";
+        document.body.appendChild(table);
     }
 
-    const totalPercepcionesCell = document.createElement("td");
+    let tfoot = document.getElementById("tfoot");
+    if (!tfoot) {
+        tfoot = document.createElement("tfoot");
+        tfoot.id = "tfoot";
+        table.appendChild(tfoot);
+    }
+
+    let totalRow = document.getElementById("tr");
+    if (!totalRow) {
+        totalRow = document.createElement("tr");
+        totalRow.id = "tr";
+        tfoot.appendChild(totalRow);
+    }
+
+    let totalPercepcionesCell = document.getElementById("totalPercepciones");
+    if (!totalPercepcionesCell) {
+        totalPercepcionesCell = document.createElement("td");
+        totalPercepcionesCell.id = "totalPercepciones";
+        totalPercepcionesCell.classList.add("centrar-texto");
+        totalRow.appendChild(totalPercepcionesCell);
+    }
     totalPercepcionesCell.textContent = totalPercepciones.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    totalRow.appendChild(totalPercepcionesCell);
 
-    const totalISRCell = document.createElement("td");
+    let totalISRCell = document.getElementById("totalISR");
+    if (!totalISRCell) {
+        totalISRCell = document.createElement("td");
+        totalISRCell.id = "totalISR";
+        totalISRCell.classList.add("centrar-texto");
+        totalRow.appendChild(totalISRCell);
+    }
     totalISRCell.textContent = totalISR.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    totalRow.appendChild(totalISRCell);
 
-    const totalPrestacionesCell = document.createElement("td");
+    let totalPrestacionesCell = document.getElementById("totalPrestaciones");
+    if (!totalPrestacionesCell) {
+        totalPrestacionesCell = document.createElement("td");
+        totalPrestacionesCell.id = "totalPrestaciones";
+        totalPrestacionesCell.classList.add("centrar-texto");
+        totalRow.appendChild(totalPrestacionesCell);
+    }
     totalPrestacionesCell.textContent = totalPrestaciones === 0 ? "0" : totalPrestaciones.toLocaleString("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    totalRow.appendChild(totalPrestacionesCell);
-
-    tfoot.appendChild(totalRow);
-    table.appendChild(tfoot);
 }
+
 
 // Función para obtener los datos del LocalStorage
 function obtenerDatosDesdeLocalStorage() {
@@ -339,7 +371,6 @@ function calcularTotalISR(datos) {
     const totalISR = datos.reduce((total, data) => total + parseFloat(data["ISR"].replace(/,/g, '')), 0);
     return totalISR;
 }
-
 
 // Función para calcular el total de prestaciones
 function calcularTotalPrestaciones(datos) {

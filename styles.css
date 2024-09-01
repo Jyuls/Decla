@@ -261,3 +261,359 @@ footer {
     background-color: rgba(255, 255, 255, 0.8); /* Cambia a gris claro */
     color: #000;
 }
+
+/* Estilos específicos para carga.html */
+
+.carga-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+}
+
+.upload-container {
+    border: 2px dashed #000;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-container:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid #000;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.button {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 12px 30px;
+    border-radius: 30px;
+    color: #fff;
+    background-color: #000;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color: #000;
+}
+
+#loader {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+#loader .spinner {
+    margin: auto; /* Centra el spinner dentro del loader */
+}
+
+/* Estilos generales para la tabla */
+table {
+    width: 100%; /* Asegurar que la tabla ocupe todo el ancho */
+    border-collapse: separate; /* Permitir bordes redondeados */
+    border-spacing: 0 5px; /* Espaciado de 5px entre filas y encabezado */
+    border-radius: 12px; /* Bordes redondeados para toda la tabla */
+    overflow: hidden; /* Asegurar que los bordes redondeados se apliquen */
+}
+
+thead {
+    display: table-header-group; /* Cambiar a table-header-group */
+    width: 100%; /* Asegurar que el encabezado ocupe todo el ancho */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Letras blancas */
+    padding: 0 10px; /* Ajuste de padding para mantener el espaciado */
+    border-radius: 12px; /* Bordes redondeados en todas las esquinas */
+}
+
+thead th {
+    display: table-cell; /* Asegurar que las celdas del encabezado se comporten como celdas de tabla */
+    padding: 15px; /* Añadir padding a las celdas del encabezado */
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+thead th:first-child {
+    border-top-left-radius: 12px; /* Bordes redondeados en la esquina superior izquierda */
+    border-bottom-left-radius: 12px; /* Bordes redondeados en la esquina inferior izquierda */
+    
+}
+
+thead th:last-child {
+    border-top-right-radius: 12px; /* Bordes redondeados en la esquina superior derecha */
+    border-bottom-right-radius: 12px; /* Bordes redondeados en la esquina inferior derecha */
+}
+
+/* Filas de la tabla */
+tbody tr {
+    display: table-row; /* Cambiar a table-row */
+    background-color: #868686; /* Fondo gris */
+    color: #fff; /* Letras blancas */
+    margin-bottom: 5px; /* Espacio entre filas */
+    border-radius: 12px; /* Bordes redondeados para todas las filas */
+    overflow: hidden; /* Asegurar que los bordes redondeados se apliquen */
+}
+
+/* Celdas de las filas */
+tbody td {
+    padding: 15px; /* Añadir padding a las celdas */
+    border-right: none; /* Eliminar bordes blancos */
+}
+
+tbody td:first-child {
+    border-top-left-radius: 12px; /* Bordes redondeados en la esquina superior izquierda */
+    border-bottom-left-radius: 12px; /* Bordes redondeados en la esquina inferior izquierda */
+}
+
+tbody td:last-child {
+    border-top-right-radius: 12px; /* Bordes redondeados en la esquina superior derecha */
+    border-bottom-right-radius: 12px; /* Bordes redondeados en la esquina inferior derecha */
+}
+
+/* Ajuste para la alineación a la derecha con un margen leve */
+.container {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 30px;
+}
+
+/* Clase para centrar el texto */
+.centrar-texto {
+    text-align: center;
+}
+
+/* Estilos específicos para la primera tabla */
+#tablaRemuneracion {
+    width: auto; /* Ajustar la tabla al contenido */
+    border-collapse: separate; /* Permitir bordes redondeados */
+    border-spacing: 0 5px; /* Espaciado de 5px entre filas y encabezado */
+    border-radius: 12px; /* Bordes redondeados para toda la tabla */
+    overflow: hidden; /* Asegurar que los bordes redondeados se apliquen */
+}
+
+#tablaRemuneracion thead {
+    display: table-header-group; /* Cambiar a table-header-group */
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Letras blancas */
+    padding: 0 10px; /* Ajuste de padding para mantener el espaciado */
+    border-radius: 12px; /* Bordes redondeados en todas las esquinas */
+}
+
+#tablaRemuneracion thead th {
+    padding: 15px; /* Añadir padding a las celdas del encabezado */
+}
+
+#tablaRemuneracion thead th:first-child {
+    border-top-left-radius: 12px; /* Bordes redondeados en la esquina superior izquierda */
+    border-bottom-left-radius: 12px; /* Bordes redondeados en la esquina inferior izquierda */
+}
+
+#tablaRemuneracion thead th:last-child {
+    border-top-right-radius: 12px; /* Bordes redondeados en la esquina superior derecha */
+    border-bottom-right-radius: 12px; /* Bordes redondeados en la esquina inferior derecha */
+}
+
+#tablaRemuneracion tbody tr {
+    background-color: #868686; /* Fondo gris */
+    color: #fff; /* Letras blancas */
+    margin-bottom: 5px; /* Espacio entre filas */
+    border-radius: 12px; /* Bordes redondeados para todas las filas */
+    overflow: hidden; /* Asegurar que los bordes redondeados se apliquen */
+}
+
+#tablaRemuneracion tbody td {
+    padding: 15px; /* Añadir padding a las celdas */
+    border-right: none; /* Eliminar bordes blancos */
+}
+
+#tablaRemuneracion tbody td:first-child {
+    border-top-left-radius: 12px; /* Bordes redondeados en la esquina superior izquierda */
+    border-bottom-left-radius: 12px; /* Bordes redondeados en la esquina inferior izquierda */
+}
+
+#tablaRemuneracion tbody td:last-child {
+    border-top-right-radius: 12px; /* Bordes redondeados en la esquina superior derecha */
+    border-bottom-right-radius: 12px; /* Bordes redondeados en la esquina inferior derecha */
+}
+
+/* Contenedor para alinear los elementos de la tabla y los botones */
+.table-wrapper {
+    display: flex; /* Usar flexbox para alinear elementos en fila */
+    align-items: flex-start; /* Alinear los elementos al inicio del contenedor */
+    justify-content: space-between; /* Espacio entre la tabla y el contenedor de botones */
+    position: relative; /* Posicionar el contenedor de botones */
+    padding: 0 10px; /* Espaciado horizontal */
+}
+
+/* Contenedor de botones centrado verticalmente */
+.button-container {
+    display: flex; /* Usar flexbox para alinear botones verticalmente */
+    justify-content: center; /* Centrar los botones verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    height: 100%; /* Ocupa todo el alto del contenedor */
+}
+
+/* Estilo para los botones */
+.square-btn {
+    background-color: black; /* Color de fondo negro */
+    color: white; /* Color del texto blanco */
+    border: none; /* Sin borde */
+    width: 120px; /* Ancho fijo para el cuadrado */
+    height: 120px; /* Alto fijo para el cuadrado */
+    
+    text-align: center; /* Centrar el texto */
+    line-height: 120px; /* Centrar el texto verticalmente */
+    font-weight: bold; /* Fuente en negrita */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    border-radius: 30px; /* Esquinas redondeadas */
+
+    display: flex; /* Usar flexbox para centrar el contenido */
+    align-items: center; /* Centrar el contenido verticalmente */
+    justify-content: center; /* Centrar el contenido horizontalmente */
+    margin: 20px; /* Espaciado vertical entre botones */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+}
+
+.square-btn:hover {
+    background-color: #333; /* Color de fondo al pasar el ratón */
+}
+
+/* Ajustar el ancho de las tablas */
+.table-wrapper, .table {
+    width: 100%; /* Asegurarse de que la tabla ocupe el ancho completo del contenedor */
+}
+
+/* Espacio entre las filas */
+.mt-5 {
+    margin-top: 3rem; /* Ajusta este valor según sea necesario */
+}
+
+.button-icon {
+    width: 90px; /* Ajusta el tamaño del icono */
+    height: 90px; /* Ajusta el tamaño del icono */
+    filter: invert(1); /* Cambia el color negro a blanco */
+}
+
+/* Estilos para el contenedor principal */
+.main-content {
+    display: flex; /* Usa flexbox para alinear la sidebar y el contenido */
+}
+
+/* Estilos para la sidebar */
+.sidebar {
+    width: 250px; /* Ancho fijo para la sidebar */
+    background-color: #f8f9fa; /* Color de fondo claro */
+    padding: 15px; /* Espaciado interno */
+    border-right: 1px solid #dee2e6; /* Borde derecho para separar la sidebar del contenido */
+}
+
+/* Estilo de los encabezados dentro de la sidebar */
+.sidebar h4, .sidebar h5 {
+    color: #343a40; /* Color del texto de los encabezados */
+    margin-bottom: 10px; /* Espaciado inferior para separar de otros elementos */
+}
+
+/* Estilo de los enlaces en la sidebar */
+.sidebar a {
+    display: block; /* Hace que cada enlace ocupe una línea completa */
+    color: #007bff; /* Color del texto de los enlaces */
+    text-decoration: none; /* Elimina el subrayado */
+    padding: 10px 15px; /* Espaciado interno para hacer clic más fácil */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave para los cambios de color */
+}
+
+/* Efecto al pasar el ratón sobre los enlaces de la sidebar */
+.sidebar a:hover {
+    background-color: #e9ecef; /* Fondo ligeramente más claro al pasar el ratón */
+    color: #0056b3; /* Color del texto al pasar el ratón */
+}
+
+/* Asegúrate de ajustar el selector para que se aplique correctamente a tus headings en la sidebar */
+.sidebar h3 {
+    color: #343a40; /* Color del texto de los encabezados */
+    margin: 0; /* Elimina el margen alrededor del heading */
+    padding: 0; /* Elimina el relleno alrededor del heading */
+    font-weight: bold; /* Opcional: ajusta el peso de la fuente si lo deseas */
+}
+
+.sidebar h4 {
+    color: #343a40; /* Color del texto de los encabezados */
+    margin: 0; /* Elimina el margen alrededor del heading */
+    padding: 0; /* Elimina el relleno alrededor del heading */
+    font-weight: normal; /* Opcional: ajusta el peso de la fuente si lo deseas */
+}
+
+/* Si quieres ajustar el espacio entre el heading y el contenido alrededor */
+.sidebar a {
+    display: block; /* Asegúrate de que los enlaces se comporten como bloques */
+    margin-bottom: 10px; /* Ajusta el espacio entre los enlaces, si es necesario */
+}
+
+
+/* Alineación vertical de los enlaces dentro de la sidebar */
+.sidebar a:not(:last-child) {
+    margin-bottom: 5px; /* Espaciado entre los enlaces */
+}
+
+/* Estilos para el contenido principal */
+.content {
+    flex: 1;
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las imágenes en el contenido */
+.content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px 0;
+}
+
+/* Estilos para los enlaces en el contenido */
+.content a {
+    color: #007bff; /* Color azul para los enlaces */
+}
+
+.content a:hover {
+    text-decoration: underline;
+}
