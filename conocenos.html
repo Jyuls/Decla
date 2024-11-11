@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conócenos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div id="navbar-container"></div> 
+    </header>
+
+    <main>
+        <section id="equipo">
+            <h2>Conoce a Nuestro Equipo</h2>
+            <div class="miembro">
+                <img src="images/johann.jpg" alt="Johann">
+                <h3>Johann Ezequiel Vega Gonzalez</h3>
+                <p>Johann es el fundador de Decla, tiene 25 años de edad y cuenta con experiencia en Control de Calidad (QA) de software y aplicaciones móviles, actualmente se encarga de la gestion empresarial y lidera el desarrollo de la plataforma.</p>
+            </div>
+            <!-- 
+            <div class="miembro">
+                <img src="ruta/foto2.jpg" alt="Foto de Miembro 2">
+                <h3>Abril Cristina Carrillo Sanchez</h3>
+                <p>Descripción breve de Miembro 2. Por ejemplo: experto en análisis de datos y optimización de sistemas con enfoque en eficiencia</p>
+            </div>
+            <div class="miembro">
+                <img src="ruta/foto3.jpg" alt="Foto de Miembro 3">
+                <h3>Jose Luis Nuñez Felipe</h3>
+                <p>Descripción breve de Miembro 3. Por ejemplo: responsable de la gestión de proyectos y comunicación con clientes, asegurando el éxito de cada etapa.</p>
+            </div>
+            -->
+        </section>
+    </main>
+    
+    <footer>
+        <div id="footer-container"></div> 
+    </footer>
+    
+    <script>
+        // Cargar el contenido de la navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar la navbar:', error));
+
+        // Cargar el contenido del footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script>
+</body>
+</html>

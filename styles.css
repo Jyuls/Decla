@@ -617,3 +617,34 @@ tbody td:last-child {
 .content a:hover {
     text-decoration: underline;
 }
+
+#equipo {
+    text-align: center;
+    padding: 20px;
+}
+
+.miembro {
+    display: inline-block;
+    width: 250px;
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.miembro img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.miembro h3 {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.miembro p {
+    font-size: 0.9em;
+    color: #555;
+}
