@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decla</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -21,15 +23,17 @@
     <div id="footer-container"></div>
 </footer>
 
-<!-- 🚀 SIN inline scripts -->
-<script src="/scripts/layout.js"></script>
+<!-- 🚀 SIN inline scripts — compatible con tu CSP -->
+<script src="scripts/layout.js"></script>
 
-<!-- Scripts externos PERMITIDOS por CSP -->
+<!-- Scripts externos PERMITIDOS por tu CSP (jQuery, Popper, XLSX, pdfmake) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
+
+<!-- Tu archivo JS externo -->
 <script src="tablaScrips.js"></script>
 
 </body>

@@ -1,56 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calcula tu Remuneración Anual</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="cargaStyles.css"> <!-- Añadir el CSS específico -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="cargaStyles.css" />
+
+    <!-- pdf.js LOCAL (NO CDN POR CSP) -->
+    <script src="/scripts/pdf.min.js"></script>
 </head>
+
 <body>
     <div id="loader">
         <div class="spinner"></div>
     </div>
 
     <header>
-        <div id="navbar-container"></div> 
+        <div id="navbar-container"></div>
     </header>
 
-    <!-- Main Content -->
-    <div class="carga-container"> <!-- Añadir clase específica -->
-        <div class="upload-section">
-            <h2>Calcula tu Remuneración Anual</h2>
-            <p>Carga tus talones de cheque para hacer el cálculo de tu remuneración anual</p>
-            <div class="upload-container" onclick="document.getElementById('upload-input').click()" ondragover="handleDragOver(event)" ondrop="handleDrop(event)">
-                <h3>Seleccionar archivos</h3>
-                <p>O arrastra y suelta los archivos aquí</p>
+    <main>
+        <div class="carga-container">
+            <div class="upload-section">
+                <h2>Calcula tu Remuneración Anual</h2>
+                <p>Carga tus talones de cheque para hacer el cálculo de tu remuneración anual</p>
+
+                <div class="upload-container"
+                     id="upload-area">
+                    <h3>Seleccionar archivos</h3>
+                    <p>O arrastra y suelta los archivos aquí</p>
+                </div>
+
+                <input type="file"
+                       id="upload-input"
+                       accept=".pdf"
+                       multiple
+                       style="display:none">
             </div>
-            <input type="file" id="upload-input" accept=".pdf" onchange="handleFileUpload(this.files)" multiple style="display: none;">
         </div>
-    </div>
+    </main>
 
-    <!-- Footer -->
     <footer>
-        <div id="footer-container"></div> 
+        <div id="footer-container"></div>
     </footer>
-    <script src="cargaScripts.js"></script>
-    <script>
-        // Cargar el contenido de la navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar la navbar:', error));
 
-        // Cargar el contenido del footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el footer:', error));
-    </script>
+    <!-- Scripts SIN inline -->
+    <script src="/scripts/layout.js"></script>
+    <script src="/scripts/cargaScripts.js"></script>
 </body>
 </html>

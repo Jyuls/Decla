@@ -6,13 +6,16 @@
     <title>Paquetes - Decla</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
     <header>
-        <div id="navbar-container"></div> 
+        <div id="navbar-container"></div>
     </header>
 
     <main>
         <div class="paquete-container">
+
             <div class="paquete">
                 <img src="p1.jpg" alt="Declaración Patrimonial para 1 Plaza">
                 <h2>Declaración Patrimonial para 1 Plaza</h2>
@@ -20,6 +23,7 @@
                 <p>Se debe proporcionar usuario y contraseña de DeclaraNet y Fone</p>
                 <a href="https://buy.stripe.com/test_bIY7wya9l2JOfK0bII" class="button">Contratar Servicio</a>
             </div>
+
             <div class="paquete">
                 <img src="p2.jpg" alt="Declaración Patrimonial para 2 Plazas">
                 <h2>Declaración Patrimonial para 2 Plazas</h2>
@@ -27,29 +31,16 @@
                 <p>Se debe proporcionar usuario y contraseña de DeclaraNet y Fone</p>
                 <a href="https://buy.stripe.com/test_6oE04695h704apG6op" class="button">Contratar Servicio</a>
             </div>
+
         </div>
     </main>
 
     <footer>
-        <div id="footer-container"></div> 
+        <div id="footer-container"></div>
     </footer>
 
-    <script>
-        // Cargar el contenido de la navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar la navbar:', error));
+    <!-- 🚀 SIN inline scripts — compatible con tu CSP -->
+    <script src="scripts/layout.js"></script>
 
-        // Cargar el contenido del footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el footer:', error));
-    </script>
 </body>
 </html>

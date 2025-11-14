@@ -1,48 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conócenos</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conócenos</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <div id="navbar-container"></div> 
-    </header>
-
-    <main>
-        <section id="equipo">
-            <h2>Conoce a Nuestro Equipo</h2>
-            <div class="miembro">
-                <img src="images/johann.jpg" alt="Johann">
-                <h3>Johann Ezequiel Vega Gonzalez</h3>
-                <p>Johann es el fundador de Decla, tiene 25 años de edad y cuenta con experiencia en Control de Calidad (QA) de software y aplicaciones móviles, actualmente se encarga de la gestion empresarial y lidera el desarrollo de la plataforma.</p>
-            </div>
-        </section>
-    </main>
-    
-    <footer>
-        <div id="footer-container"></div> 
-    </footer>
-    
-    <script>
-        // Cargar el contenido de la navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar la navbar:', error));
-
-        // Cargar el contenido del footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el footer:', error));
-    </script>
+<header>
+<div id="navbar-container"></div>
+</header>
+<main>
+<section id="equipo">
+<h2>Conoce a Nuestro Equipo</h2>
+<div class="miembro">
+<img src="images/johann.jpg" alt="Johann">
+<h3>Johann Ezequiel Vega Gonzalez</h3>
+<p>Johann es el fundador de Decla, tiene 25 años de edad y cuenta con experiencia en Control de Calidad (QA) de software y aplicaciones móviles, actualmente se encarga de la gestión empresarial y lidera el desarrollo de la plataforma.</p>
+</div>
+</section>
+</main>
+<footer>
+<div id="footer-container"></div>
+</footer>
+<script src="/scripts/layout.js"></script>
 </body>
 </html>
