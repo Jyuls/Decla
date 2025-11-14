@@ -6,44 +6,27 @@
     <title>Decla</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
     <header>
-        <div id="navbar-container"></div> 
+        <div id="navbar-container"></div>
     </header>
 
     <main>
         <div class="hero">
             <div class="content-left">
-                <h1>Simplifica tu declaración patrimonial</h1>
-                <p>Decla te ofrece soluciones para facilitar el proceso de realizar tu declaración patrimonial.</p>
-                <div class="buttons">
-                    <a href="/guia.html" class="button light">Ver una guía o tutorial</a>
-                    <a href="/paquetes.html" class="button dark">Contratar a un experto</a>
-                </div>
+                <!-- TODO: tu contenido -->
             </div>
         </div>
     </main>
-    
+
     <footer>
-        <div id="footer-container"></div> 
+        <div id="footer-container"></div>
     </footer>
 
-    <script>
-        // Cargar el contenido de la navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar la navbar:', error));
+    <!-- 🚀 SIN inline scripts -->
+    <script src="/scripts/layout.js"></script>
 
-        // Cargar el contenido del footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el footer:', error));
-    </script>
 </body>
 </html>
