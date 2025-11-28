@@ -1,14 +1,9 @@
 /*
   Content-Security-Policy:
     default-src 'self';
-    script-src
-      'self'
-      https://code.jquery.com
-      https://cdn.jsdelivr.net
-      https://cdnjs.cloudflare.com
-    ;
+    script-src 'self';
     style-src 'self';
-    font-src 'self' https://cdnjs.cloudflare.com;
+    font-src 'self';
     img-src 'self';
     connect-src 'self';
     object-src 'none';
