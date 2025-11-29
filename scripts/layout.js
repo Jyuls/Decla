@@ -1,17 +1,19 @@
-// Cargar navbar
-fetch('/navbar.html')
-    .then(r => r.text())
-    .then(html => {
-        const cont = document.getElementById('navbar-container');
-        if (cont) cont.innerHTML = html;
-    })
-    .catch(err => console.error("Error cargando navbar:", err));
+document.addEventListener("DOMContentLoaded", () => {
+    // Cargar la navbar
+    fetch("/navbar.html")
+        .then(res => res.text())
+        .then(html => {
+            const container = document.getElementById("navbar-container");
+            if (container) container.innerHTML = html;
+        })
+        .catch(err => console.error("Error cargando navbar:", err));
 
-// Cargar footer
-fetch('/footer.html')
-    .then(r => r.text())
-    .then(html => {
-        const cont = document.getElementById('footer-container');
-        if (cont) cont.innerHTML = html;
-    })
-    .catch(err => console.error("Error cargando footer:", err));
+    // Cargar el footer
+    fetch("/footer.html")
+        .then(res => res.text())
+        .then(html => {
+            const container = document.getElementById("footer-container");
+            if (container) container.innerHTML = html;
+        })
+        .catch(err => console.error("Error cargando footer:", err));
+});

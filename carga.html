@@ -44,16 +44,15 @@
     <!-- Cargar PDF.js como módulo -->
     <script type="module">
         import * as pdfjsLib from "/scripts/pdfjs/pdf.mjs";
-
-        // Configurar worker
         pdfjsLib.GlobalWorkerOptions.workerSrc = "/scripts/pdfjs/pdf.worker.mjs";
-
-        // Exponer global para el script normal
         window.pdfjsLib = pdfjsLib;
     </script>
 
-    <!-- Tu script normal -->
-    <script src="./scripts/cargaScripts.js"></script>
+    <!-- Script de carga normal -->
+    <script src="/scripts/cargaScripts.js"></script>
+
+    <!-- Script para navbar y footer -->
+    <script src="/scripts/layout.js"></script>
 
 </body>
 </html>
