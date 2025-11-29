@@ -29,12 +29,10 @@ async function handleFileUpload(files) {
 
         try {
             await procesarArchivos(files);
-
-            // Redirigir cuando ya terminó todo
             window.location.href = "tabla.html";
 
         } catch (error) {
-            alert("Solo es válido subir archivos PDF");
+            alert("Ocurrió un error al procesar los archivos PDF");
             console.error(error);
         } finally {
             hideLoader();
@@ -48,6 +46,7 @@ async function handleFileUpload(files) {
 // ============================
 
 async function procesarArchivos(files) {
+
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
 
@@ -55,30 +54,39 @@ async function procesarArchivos(files) {
             throw new Error("Archivo no PDF detectado");
         }
 
-        const reader = new FileReader();
+        const fileData = await leerArchivoComoArrayBuffer(file);
 
-        const fileData = await new Promise((resolve, reject) => {
-            reader.onload = e => resolve(e.target.result);
-            reader.onerror = e => reject(e.target.error);
-            reader.readAsArrayBuffer(file);
+        const loadingTask = pdfjsLib.getDocument({
+            data: new Uint8Array(fileData),
+            cMapUrl: "/scripts/pdfjs/cmaps/",
+            cMapPacked: true
         });
 
-        // PDF.js
-        const loadingTask = pdfjsLib.getDocument(new Uint8Array(fileData));
         const pdf = await loadingTask.promise;
 
         const page = await pdf.getPage(1);
         const textContent = await page.getTextContent();
 
-        // Extraer texto
-        let pageText = "";
-        for (let item of textContent.items) {
-            pageText += (item.str || "") + " ";
-        }
+        let pageText = textContent.items.map(item => item.str || "").join(" ");
 
-        // Guardar en LocalStorage
         localStorage.setItem(`document${i}`, pageText.trim());
     }
+}
+
+
+// ============================
+// Helper para leer archivo
+// ============================
+
+function leerArchivoComoArrayBuffer(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = e => reject(e.target.error);
+
+        reader.readAsArrayBuffer(file);
+    });
 }
 
 

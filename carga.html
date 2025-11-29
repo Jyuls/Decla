@@ -6,10 +6,6 @@
     <title>Calcula tu Remuneración Anual</title>
 
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="cargaStyles.css" />
-
-    <!-- pdf.js LOCAL (NO CDN POR CSP) -->
-    <script src="/scripts/pdf.min.js"></script>
 </head>
 
 <body>
@@ -27,8 +23,7 @@
                 <h2>Calcula tu Remuneración Anual</h2>
                 <p>Carga tus talones de cheque para hacer el cálculo de tu remuneración anual</p>
 
-                <div class="upload-container"
-                     id="upload-area">
+                <div class="upload-container" id="upload-area">
                     <h3>Seleccionar archivos</h3>
                     <p>O arrastra y suelta los archivos aquí</p>
                 </div>
@@ -46,8 +41,19 @@
         <div id="footer-container"></div>
     </footer>
 
-    <!-- Scripts SIN inline -->
-    <script src="/scripts/layout.js"></script>
-    <script src="/scripts/cargaScripts.js"></script>
+    <!-- Cargar PDF.js como módulo -->
+    <script type="module">
+        import * as pdfjsLib from "/scripts/pdfjs/pdf.mjs";
+
+        // Configurar worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = "/scripts/pdfjs/pdf.worker.mjs";
+
+        // Exponer global para el script normal
+        window.pdfjsLib = pdfjsLib;
+    </script>
+
+    <!-- Tu script normal -->
+    <script src="./scripts/cargaScripts.js"></script>
+
 </body>
 </html>
