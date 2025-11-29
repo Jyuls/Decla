@@ -41,18 +41,14 @@
         <div id="footer-container"></div>
     </footer>
 
-    <!-- Cargar PDF.js como módulo -->
-    <script type="module">
-        import * as pdfjsLib from "/scripts/pdfjs/pdf.mjs";
-        pdfjsLib.GlobalWorkerOptions.workerSrc = "/scripts/pdfjs/pdf.worker.mjs";
-        window.pdfjsLib = pdfjsLib;
-    </script>
+    <!-- 📌 Navbar/Footer sin inline scripts -->
+    <script src="./scripts/layout.js"></script>
 
-    <!-- Script de carga normal -->
-    <script src="/scripts/cargaScripts.js"></script>
+    <!-- 📌 PDF.js SIN inline scripts -->
+    <script type="module" src="./scripts/setupPdfJs.js"></script>
 
-    <!-- Script para navbar y footer -->
-    <script src="/scripts/layout.js"></script>
+    <!-- 📌 Tu script principal -->
+    <script src="./scripts/cargaScripts.js"></script>
 
 </body>
 </html>
