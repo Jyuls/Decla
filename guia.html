@@ -335,23 +335,8 @@
         <div id="footer-container"></div> 
     </footer>
 
-    <script>
-        // Cargar el contenido de la navbar
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar la navbar:', error));
-
-        // Cargar el contenido del footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(error => console.error('Error al cargar el footer:', error));
-    </script>
+    <script src="./scripts/layout.js"></script>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script>
