@@ -1,5 +1,5 @@
 // Cargar navbar
-fetch('/navbar.html')
+fetch('./navbar.html')
     .then(r => r.text())
     .then(html => {
         const cont = document.getElementById('navbar-container');
@@ -8,7 +8,7 @@ fetch('/navbar.html')
     .catch(err => console.error("Error cargando navbar:", err));
 
 // Cargar footer
-fetch('/footer.html')
+fetch('./footer.html')
     .then(r => r.text())
     .then(html => {
         const cont = document.getElementById('footer-container');
