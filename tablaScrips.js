@@ -162,9 +162,13 @@ function generarPDF() {
 
 
 // Llamar a la función generarPDF cuando se haga clic en el botón "Generar PDF"
-document.getElementById("exportPDF").addEventListener("click", function() {
-    generarPDF();
-});
+const exportPDFBtn = document.getElementById("exportPDF");
+
+if (exportPDFBtn) {
+    exportPDFBtn.addEventListener("click", function () {
+        generarPDF();
+    });
+}
 
 // Función para generar un archivo de Excel
 function exportToExcel() {
@@ -213,9 +217,13 @@ function exportToExcel() {
 }
 
 // Agregar evento de clic al botón de exportar a Excel
-document.getElementById("exportExcel").addEventListener("click", function() {
-    exportToExcel();
-});
+const exportExcelBtn = document.getElementById("exportExcel");
+
+if (exportExcelBtn) {
+    exportExcelBtn.addEventListener("click", function () {
+        exportToExcel();
+    });
+}
 
 document.addEventListener("DOMContentLoaded", function() {
     const datos = obtenerDatosDesdeLocalStorage();
