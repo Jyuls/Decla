@@ -48,6 +48,22 @@
     </footer>
 
     <script src="scripts/layout.js"></script>
+        <script>
+        // Cargar el contenido de la navbar
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar la navbar:', error));
 
+        // Cargar el contenido del footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error al cargar el footer:', error));
+    </script> 
 </body>
 </html>
